@@ -1,5 +1,5 @@
 ### Live Data :
-==========
+------------------------
 
 LiveData is an observable data holder class that is also lifecycle aware.
 
@@ -77,19 +77,16 @@ I'm going to touch on a few more complex usages.
 
 LiveData also provides transformations, including map, switchMap and a class called MediatorLiveData for your own custom transformations.
 
-*[Map]
-*[SwitchMap]
-*[MediatorLiveData]
 
-Map lets you apply a function to the output of LiveData A and then propagate the results downstream to LiveData B.For example, you could use LiveData to take a user object and instead output a string of the user's combined first and last name.
+***Map*** lets you apply a function to the output of LiveData A and then propagate the results downstream to LiveData B.For example, you could use LiveData to take a user object and instead output a string of the user's combined first and last name.
 
-SwitchMap function transformation is a lot like map, but for mapping functions that emit LiveData instead of values.So an example here is if you have a bunch of users, perhaps stored in a Room database, you might have a lookup function for those users.Using switchMap, you'd have a LiveData for the user ID. Whenever the ID changes, your user lookup function would be called with that ID.
+***SwitchMap*** function transformation is a lot like map, but for mapping functions that emit LiveData instead of values.So an example here is if you have a bunch of users, perhaps stored in a Room database, you might have a lookup function for those users.Using switchMap, you'd have a LiveData for the user ID. Whenever the ID changes, your user lookup function would be called with that ID.
 The result LiveData now references the newly found user LiveData.
 
 OK, so no matter how many different times you call this look up function and get a different LiveData, your UI only needs to observe
 the result LiveData once, which is the power of switchMap.
 
-Now, if you want to go ahead and make your own custom data transformations, you should take a look at the MediatorLiveData class.
+Now, if you want to go ahead and make your own custom data transformations, you should take a look at the ***MediatorLiveData*** class.
 
 MediatorLiveData includes methods to add and remove source LiveData objects.You could then combine and propagate events from all these sources downstream.
 
