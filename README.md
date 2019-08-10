@@ -89,7 +89,7 @@ Now, if you want to go ahead and make your own custom data transformations, you 
 
 MediatorLiveData includes methods to add and remove source LiveData objects.You could then combine and propagate events from all these sources downstream.
 
-#### Example
+#### MediatorLiveData Example
 ```kotlin
  init {
         userPosts = Transformations
@@ -135,7 +135,7 @@ MediatorLiveData includes methods to add and remove source LiveData objects.You 
 
 Getting started with LiveData is simple, but there is a lot of potential for experimentation with this lifecycle aware observable.
 
-Hopefully this has inspired you to build something.
 
-And as always, the documentation is linked.
+
+
 
