@@ -10,6 +10,7 @@ So in short, LiveData makes it easy to keep what's going on screen in sync with 
 
 OK, so here's some actual code.LiveData objects will usually be kept in the ViewModel class.
 
+```kotlin
         class UserProfileViewModel : ViewModel {
 
           private val _user = MutableLiveData<User>() 
@@ -17,17 +18,20 @@ OK, so here's some actual code.LiveData objects will usually be kept in the View
           val user : LiveData<User>
               get() = _user
         }
+```
         
 If you're not sure what a ViewModel is, no worries. Check out the video.
 
 Let's say you're creating an activity and ViewModel for a user profile. You'll have this user LiveData object that holds a User object.
 
+```kotlin
         override fun onCreate(savedInstanceState : Bundle ? ) {
                 userViewModel.user.observe(this,
                                 Observer {
                                   user -> userNameTextView.Text = user?.name
                                  }
         }
+```
         
 Now, over in your activity's onCreate, you'll get that LiveData from the ViewModel class. Call observe on the LiveData.
 For the first argument, you're going to pass in the UI, in this case the activity. The second argument is an "observer,"which is just a callback. Here you will call the code to update the UI. 
@@ -85,7 +89,7 @@ Now, if you want to go ahead and make your own custom data transformations, you 
 MediatorLiveData includes methods to add and remove source LiveData objects.You could then combine and propagate events from all these sources downstream. here is the example of mediator live looks like
 
 ```kotlin
-    init {
+ init {
         userPosts = Transformations
             .switchMap(postId) { post ->
                 if (post.isNullOrBlank()) {
@@ -94,7 +98,6 @@ MediatorLiveData includes methods to add and remove source LiveData objects.You 
                     userPostViewModel.getPosts(postId.value!!)
                 }
             }
-
 
         userComments = Transformations
             .switchMap(postId) { search ->
@@ -105,7 +108,6 @@ MediatorLiveData includes methods to add and remove source LiveData objects.You 
                 }
             }
 
-
         result.addSource(userComments) { value ->
             result.value = combineLatestData(userComments.value?.data, userPosts.value?.data)
         }
@@ -115,19 +117,15 @@ MediatorLiveData includes methods to add and remove source LiveData objects.You 
     }
 
 
-
-
     private fun combineLatestData(
         comments: List<Comments>?,
         posts: Posts?
     ): Resource<PostWithComments> {
 
-
         // Don't send a success until we have both results
         if (comments == null || posts == null) {
             return Resource.loading(null)
         }
-
 
         return Resource.success(PostWithComments(post = posts, comments = comments))
     }
