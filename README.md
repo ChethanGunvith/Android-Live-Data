@@ -1,5 +1,4 @@
-### Live Data :
-------------------------
+# Live Data :
 
 LiveData is an observable data holder class that is also lifecycle aware.
 
@@ -46,7 +45,7 @@ Now you can change the LiveData by calling either
 Use setValue if you're running on the UI thread, and then use postValue if you're running on a background thread. When either setValue or postValue is called,the LiveData notifies active observers.
 
 
-If you're using Android Studio 3.1 or higher, LiveData and ViewModels work with Databinding.Usually you're going to go ahead and bind your View Model to your XML layout, which is explained in the ViewModel video.
+If you're using Android Studio 3.1 or higher, LiveData and ViewModels work with Databinding.Usually you're going to go ahead and bind your View Model to your XML layout.
 
 Now, after associating your ViewModel and Databinding layout, you just need to add this single line change to have your LiveData be properly observedwhen bound to the XML. You can now include references in your XML to your ViewModel and the LiveData stored with it.
 If you use Databinding, you're going to no longer need to actually manually set up these observers.
