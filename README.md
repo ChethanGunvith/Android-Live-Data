@@ -11,13 +11,12 @@ So in short, LiveData makes it easy to keep what's going on screen in sync with 
 OK, so here's some actual code.LiveData objects will usually be kept in the ViewModel class.
 
 ```kotlin
-        class UserProfileViewModel : ViewModel {
-
-          private val _user = MutableLiveData<User>() 
-          // public exposed Livedata, not mutable
-          val user : LiveData<User>
-              get() = _user
-        }
+class UserProfileViewModel : ViewModel {
+        private val _user = MutableLiveData<User>() 
+        // public exposed Livedata, not mutable
+        val user : LiveData<User>
+             get() = _user
+ }
 ```
         
 If you're not sure what a ViewModel is, no worries. Check out the video.
@@ -25,12 +24,12 @@ If you're not sure what a ViewModel is, no worries. Check out the video.
 Let's say you're creating an activity and ViewModel for a user profile. You'll have this user LiveData object that holds a User object.
 
 ```kotlin
-        override fun onCreate(savedInstanceState : Bundle ? ) {
-                userViewModel.user.observe(this,
-                                Observer {
-                                  user -> userNameTextView.Text = user?.name
-                                 }
-        }
+override fun onCreate(savedInstanceState : Bundle ? ) {
+        userViewModel.user.observe(this,
+                Observer {
+                        user -> userNameTextView.Text = user?.name
+                 }
+}
 ```
         
 Now, over in your activity's onCreate, you'll get that LiveData from the ViewModel class. Call observe on the LiveData.
