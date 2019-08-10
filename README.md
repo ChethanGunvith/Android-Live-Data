@@ -84,46 +84,7 @@ Now, if you want to go ahead and make your own custom data transformations, you 
 
 MediatorLiveData includes methods to add and remove source LiveData objects.You could then combine and propagate events from all these sources downstream. here is the example of mediator live looks like
 
-    init {
-        userPosts = Transformations
-            .switchMap(postId) { post ->
-                if (post.isNullOrBlank()) {
-                    AbsentLiveData.create()
-                } else {
-                    userPostViewModel.getPosts(postId.value!!)
-                }
-            }
-
-        userComments = Transformations
-            .switchMap(postId) { search ->
-                if (search.isNullOrBlank()) {
-                    AbsentLiveData.create()
-                } else {
-                    userCommentsRepository.getUserComments(postId.value!!)
-                }
-            }
-
-        result.addSource(userComments) { value ->
-            result.value = combineLatestData(userComments.value?.data, userPosts.value?.data)
-        }
-        result.addSource(userPosts) { value ->
-            result.value = combineLatestData(userComments.value?.data, userPosts.value?.data)
-        }
-    }
-
-
-    private fun combineLatestData(
-        comments: List<Comments>?,
-        posts: Posts?
-    ): Resource<PostWithComments> {
-
-        // Don't send a success until we have both results
-        if (comments == null || posts == null) {
-            return Resource.loading(null)
-        }
-
-        return Resource.success(PostWithComments(post = posts, comments = comments))
-    }
+https://github.com/chethu/BabylonCodingAssignment/blob/cf0fa1a41663b591b169de5f32d19580f38015de/app/src/main/java/com/chethan/babylon/view/postDetail/UserPostDetailViewModel.kt#L35-L76
 
 Getting started with LiveData is simple, but there is a lot of potential for experimentation with this lifecycle aware observable.
 
