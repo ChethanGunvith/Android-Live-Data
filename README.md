@@ -85,7 +85,7 @@ the result LiveData once, which is the power of switchMap.
 
 Now, if you want to go ahead and make your own custom data transformations, you should take a look at the MediatorLiveData class.
 
-MediatorLiveData includes methods to add and remove source LiveData objects.You could then combine and propagate events from all these sources downstream. here is the example of mediator live looks like
+MediatorLiveData includes methods to add and remove source LiveData objects.You could then combine and propagate events from all these sources downstream. here is the example of MediatorLiveData looks like
 
 ```kotlin
  init {
