@@ -1,5 +1,5 @@
 ### Live Data :
-
+==========
 
 LiveData is an observable data holder class that is also lifecycle aware.
 
@@ -10,6 +10,7 @@ So in short, LiveData makes it easy to keep what's going on screen in sync with 
 
 OK, so here's some actual code.LiveData objects will usually be kept in the ViewModel class.
 
+#### Example
 ```kotlin
 class UserProfileViewModel : ViewModel {
         private val _user = MutableLiveData<User>() 
@@ -23,6 +24,7 @@ If you're not sure what a ViewModel is, no worries. Check out the video.
 
 Let's say you're creating an activity and ViewModel for a user profile. You'll have this user LiveData object that holds a User object.
 
+#### Example
 ```kotlin
 override fun onCreate(savedInstanceState : Bundle ? ) {
         userViewModel.user.observe(this,
@@ -75,6 +77,10 @@ I'm going to touch on a few more complex usages.
 
 LiveData also provides transformations, including map, switchMap and a class called MediatorLiveData for your own custom transformations.
 
+*[Map]
+*[SwitchMap]
+*[MediatorLiveData]
+
 Map lets you apply a function to the output of LiveData A and then propagate the results downstream to LiveData B.For example, you could use LiveData to take a user object and instead output a string of the user's combined first and last name.
 
 SwitchMap function transformation is a lot like map, but for mapping functions that emit LiveData instead of values.So an example here is if you have a bunch of users, perhaps stored in a Room database, you might have a lookup function for those users.Using switchMap, you'd have a LiveData for the user ID. Whenever the ID changes, your user lookup function would be called with that ID.
@@ -85,8 +91,9 @@ the result LiveData once, which is the power of switchMap.
 
 Now, if you want to go ahead and make your own custom data transformations, you should take a look at the MediatorLiveData class.
 
-MediatorLiveData includes methods to add and remove source LiveData objects.You could then combine and propagate events from all these sources downstream. here is the example of MediatorLiveData looks like
+MediatorLiveData includes methods to add and remove source LiveData objects.You could then combine and propagate events from all these sources downstream.
 
+#### Example
 ```kotlin
  init {
         userPosts = Transformations
