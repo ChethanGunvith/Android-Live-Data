@@ -85,6 +85,33 @@ The result LiveData now references the newly found user LiveData.
 OK, so no matter how many different times you call this look up function and get a different LiveData, your UI only needs to observe
 the result LiveData once, which is the power of switchMap.
 
+To understand more, Let’s say we’re looking for the username "Alice". The repository is creating a new instance of that User LiveData class and after that, we display the users. After some time we need to look for the username "Bob" there’s the repository creates a new instance of LiveData and our UI subscribes to that LiveData. So at this moment, our UI subscribes to two instances of LiveData because we never remove the previous one. So it means whenever our repository changes the user’s data it sends two times subscription. 
+
+what we actually need is a mechanism that allows us to stop observing from the previous source whenever we want to observe a new one. In order do this, we would use switchMap. Under the hood, switchMap uses the MediatorLiveData that removes the initial source whenever the new source is added. In short, it does all the mechanism removing and adding a new Observer for us.
+
+```kotlin
+ class UserRepo{
+     fun searchUserWithName(name  : String) : LiveData<List<User>>{
+           .... logic for search user
+     }
+  }
+
+  class UserViewModel : ViewModel() {
+
+      private val query = MutableLiveData<String>()
+      private val userRepo = UserRepo()
+
+      val userNameResult: LiveData<List<User>> = Transformations.switchMap(
+              query,
+              ::temp
+      )
+
+      private fun temp(name: String) = userRepo.searchUserWithName(name)
+
+      fun searchUserByName(name: String) = apply { query.value = name }
+  }
+ ```
+
 Now, if you want to go ahead and make your own custom data transformations, you should take a look at the ***MediatorLiveData*** class.
 
 MediatorLiveData includes methods to add and remove source LiveData objects.You could then combine and propagate events from all these sources downstream.
