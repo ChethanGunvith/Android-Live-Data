@@ -160,7 +160,7 @@ MediatorLiveData includes methods to add and remove source LiveData objects.You 
     }
 ```
 
-Getting started with LiveData is simple, but there is a lot of potential for experimentation with this lifecycle aware observable.
+Getting started with LiveData is simple, but there is a lot of potential for experimentation with this lifecycle aware observable. here is an example to refer - https://github.com/chethu/Android-Mediator-live-data-example
 
 
 
