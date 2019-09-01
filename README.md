@@ -77,7 +77,26 @@ I'm going to touch on a few more complex usages.
 LiveData also provides transformations, including map, switchMap and a class called MediatorLiveData for your own custom transformations.
 
 
-***Map*** lets you apply a function to the output of LiveData A and then propagate the results downstream to LiveData B.For example, you could use LiveData to take a user object and instead output a string of the user's combined first and last name.
+***Map*** 
+
+#### when do need Map ?
+
+We already know that LiveData's great communicator between View and a ViewModel.  What if we have a third component, maybe a repository exposing live data,  How do we communicate from the ViewModel and respository?  We don't have a lifecycle in respository.
+
+***how do we make a bridge between the view and respository ?***  
+Answer is we use a Map.  A one-to-one static transformation.
+
+This is how the signature would look like in Kotlin
+```kotlin
+val viewModelResult : LiveData<UiModel> = 
+Transformation.map(respository.getDataForUser()) {
+        data ->
+                convertDataToMainUIModel(data)
+}
+```
+The first parameter is the source, the LiveData source and the second parameter is the transformation function.  It's converting from the data of the model to the UI model. It has source, which is a LiveData of X and it returns a LiveData y.  So, it's a breach of LiveDatas and in the middle, we have a transformation function that transtorms from X to Y. 
+
+So, when you establish the transformation, the key, here, is the ***lifecycle is carried over for you***. 
 
 ***SwitchMap*** function transformation is a lot like map, but for mapping functions that emit LiveData instead of values.So an example here is if you have a bunch of users, perhaps stored in a Room database, you might have a lookup function for those users.Using switchMap, you'd have a LiveData for the user ID. Whenever the ID changes, your user lookup function would be called with that ID.
 The result LiveData now references the newly found user LiveData.
