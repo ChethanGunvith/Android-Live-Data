@@ -79,11 +79,11 @@ LiveData also provides transformations, including map, switchMap and a class cal
 
 ***Map*** 
 
-#### when do need Map ?
+#### When do need Map ?
 
 We already know that LiveData's great communicator between View and a ViewModel.  What if we have a third component, maybe a repository exposing live data,  How do we communicate from the ViewModel and respository?  We don't have a lifecycle in respository.
 
-***how do we make a bridge between the view and respository ?***  
+***How do we make a bridge between the view and respository ?***  
 Answer is we use a Map.  A one-to-one static transformation.
 
 This is how the signature would look like in Kotlin
