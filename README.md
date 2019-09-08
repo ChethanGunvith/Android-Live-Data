@@ -18,8 +18,6 @@ class UserProfileViewModel : ViewModel {
              get() = _user
  }
 ```
-        
-If you're not sure what a ViewModel is, no worries. Check out the video.
 
 Let's say you're creating an activity and ViewModel for a user profile. You'll have this user LiveData object that holds a User object.
 
