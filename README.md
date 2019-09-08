@@ -70,7 +70,7 @@ So those are the basics of working with LiveData and why it's useful.
 
 I'm going to touch on a few more complex usages.
 
-***Room*** is built to work well with LiveData. Room can return LiveData objects which are automatically notified when the database data changes and have their data loaded in a background thread.This makes it easy to have the UI update when your database updates. You can go ahead and learn more about Room in the introduction to Room video.
+***Room*** is built to work well with LiveData. Room can return LiveData objects which are automatically notified when the database data changes and have their data loaded in a background thread.This makes it easy to have the UI update when your database updates. 
 
 LiveData also provides transformations, including map, switchMap and a class called MediatorLiveData for your own custom transformations.
 
