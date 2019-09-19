@@ -77,7 +77,7 @@ LiveData also provides transformations, including map, switchMap and a class cal
 
 ***Map*** 
 
-#### When do need Map ?
+#### When do you need Map ?
 
 We already know that LiveData's great communicator between View and a ViewModel.  What if we have a third component, maybe a repository exposing live data,  How do we communicate from the ViewModel and respository?  We don't have a lifecycle in respository.
 
